@@ -7,6 +7,11 @@ pipeline{
 				sh'mvn clean install'
 			}
 		}
+		stage('print'){
+			steps{
+				sh 'echo "123"'
+			}
+		}
 		
 	}
 	}
