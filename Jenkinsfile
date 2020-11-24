@@ -1,23 +1,8 @@
 #!groovy
 pipeline{
 	agent any
-	options {
-        timeout(time: 100, unit: 'SECONDS') 
-    }
-	stages{
-		stage('maven install and dast'){
-			parallel{
-				stage('deploy'){
-				steps{
-					script{
-                		withEnv(['JENKINS_NODE_COOKIE=dontkill']) {
-
-                    		sh "mvn clean install || true"
-                }
-            }
-			}
-		}
-
+	
+		stages{
 		stage('DAST') {
             steps {
                 script {
@@ -32,7 +17,7 @@ pipeline{
 		
 		}
 	}
-}
+
 		
-	}
+	
 	
