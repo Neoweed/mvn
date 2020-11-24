@@ -20,7 +20,7 @@ pipeline{
 	
 		stage('print'){
 			steps{
-				sh 'sleep 100'
+				sh 'sleep 30'
 				sh 'echo "123"'
 			}
 		}
