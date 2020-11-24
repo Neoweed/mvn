@@ -8,7 +8,7 @@ pipeline{
 				steps{
 					script{
                 		withEnv(['JENKINS_NODE_COOKIE=dontkill']) {
-                    		BUILD_ID=dontKillMe sh "mvn clean install"
+                    		sh "mvn clean install"
                 }
             }
 			}
