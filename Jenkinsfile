@@ -1,6 +1,9 @@
 #!groovy
 pipeline{
 	agent any
+	options {
+        timeout(time: 100, unit: 'SECONDS') 
+    }
 	stages{
 		stage('maven install and run echo'){
 			parallel{
@@ -10,7 +13,6 @@ pipeline{
                 		withEnv(['JENKINS_NODE_COOKIE=dontkill']) {
 
                     		sh "mvn clean install"
-                    		timeout(time: 50, unit: 'SECONDS') 
                 }
             }
 			}
@@ -18,7 +20,7 @@ pipeline{
 	
 		stage('print'){
 			steps{
-				sh 'sleep 30'
+				sh 'sleep 100'
 				sh 'echo "123"'
 			}
 		}
