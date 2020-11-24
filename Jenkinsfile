@@ -10,6 +10,7 @@ pipeline{
                 }
 			}
 		}
+	}
 		stage('print'){
 			steps{
 				sh 'echo "123"'
