@@ -8,7 +8,9 @@ pipeline{
 				steps{
 					script{
                 		withEnv(['JENKINS_NODE_COOKIE=dontkill']) {
+
                     		sh "mvn clean install"
+                    		timeout(time: 50, unit: 'SECONDS') 
                 }
             }
 			}
@@ -16,6 +18,7 @@ pipeline{
 	
 		stage('print'){
 			steps{
+				sh 'sleep 30'
 				sh 'echo "123"'
 			}
 		}
