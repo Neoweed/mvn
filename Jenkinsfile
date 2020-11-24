@@ -12,7 +12,7 @@ pipeline{
 					script{
                 		withEnv(['JENKINS_NODE_COOKIE=dontkill']) {
 
-                    		sh "mvn clean install"
+                    		sh "mvn clean install || true"
                 }
             }
 			}
