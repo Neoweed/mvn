@@ -2,6 +2,7 @@
 pipeline{
 	agent any
 	stages{
+		parallel {
 		stage('maven install'){
 			steps{
 				script{
@@ -16,6 +17,6 @@ pipeline{
 				sh 'echo "123"'
 			}
 		}
-		
+		}
 	}
 	}
