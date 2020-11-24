@@ -7,7 +7,7 @@ pipeline{
             steps {
                 script {
                     startZap(host: '127.0.0.1', port: 8090, zapHome: "/usr/local/zaproxy") // Start ZAP at /opt/zaproxy/zap.sh, allowing scans on github.com
-                	runZapCrawler(host:"http://127.0.0.1/8080")
+                	runZapCrawler()
                 	archiveZap(failAllAlerts: 1, failHighAlerts: 0, failMediumAlerts: 0, failLowAlerts: 0, falsePositivesFilePath: "zapFalsePositives.json")
                 }
             }
