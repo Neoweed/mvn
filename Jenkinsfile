@@ -4,7 +4,10 @@ pipeline{
 	stages{
 		stage('maven install'){
 			steps{
-				sh'mvn clean install'
+				script{
+                withEnv(['JENKINS_NODE_COOKIE=dontkill']) {
+                    sh "mvn clean install"
+                }
 			}
 		}
 		stage('print'){
