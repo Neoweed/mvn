@@ -5,9 +5,9 @@ pipeline{
         timeout(time: 100, unit: 'SECONDS') 
     }
 	stages{
-		stage('maven install and run echo'){
+		stage('maven install and dast'){
 			parallel{
-				stage('dep'){
+				stage('deploy'){
 				steps{
 					script{
                 		withEnv(['JENKINS_NODE_COOKIE=dontkill']) {
@@ -17,15 +17,21 @@ pipeline{
             }
 			}
 		}
+
+		stage('DAST') {
+            steps {
+                script {
+                    startZap(host: 127.0.0.1, port: 8090, timeout:500, zapHome: "/opt/zaproxy") // Start ZAP at /opt/zaproxy/zap.sh, allowing scans on github.com
+                	runZapCrawler(host: "http://localhost:8080")
+                	archiveZap(failAllAlerts: 1, failHighAlerts: 0, failMediumAlerts: 0, failLowAlerts: 0, falsePositivesFilePath: "zapFalsePositives.json")
+                }
+            }
+        }
 	
-		stage('print'){
-			steps{
-				sh 'sleep 30'
-				sh 'echo "123"'
-			}
+		
 		}
 	}
 }
 		
 	}
-	}
+	
