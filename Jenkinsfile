@@ -7,8 +7,7 @@ pipeline{
             steps {
                 script {
                 	sh 'docker pull owasp/zap2docker-stable'
-                    writeFile file: 'DAST.txt', text: 'DAST_report'
-                    sh 'docker run -t owasp/zap2docker-stable zap-baseline.py -t "http://172.17.0.1:8080"|| true'
+                    sh 'docker run -v /var/lib/jenkins/workspace/test1/:/zap/wrk/ -t owasp/zap2docker-stable zap-baseline.py -t "http://172.17.0.1:8080"|| true'
 
                 }
             }
