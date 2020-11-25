@@ -6,9 +6,10 @@ pipeline{
 		stage('DAST') {
             steps {
                 script {
-                    startZap(host: '127.0.0.1', port: 8090, zapHome: "/usr/local/zaproxy",sessionPath:"/usr/local/session.session") // Start ZAP at /opt/zaproxy/zap.sh, allowing scans on github.com
-                	runZapCrawler(host: "http://localhost:8080")
-                	archiveZap(failAllAlerts: 1, failHighAlerts: 0, failMediumAlerts: 0, failLowAlerts: 0, falsePositivesFilePath: "zapFalsePositives.json")
+                	sh 'docker pull owasp/zap2docker-weekly'
+                    writeFile file: 'DAST.txt', text: 'DAST_report'
+                    sh 'docker run -t owasp/zap2docker-weekly zap-baseline.py -t http://$(ip -f inet -o addr show docker0 | awk '{print $4}' | cut -d '/' -f 1):8080'
+
                 }
             }
         }
