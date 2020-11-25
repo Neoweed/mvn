@@ -8,7 +8,7 @@ pipeline{
                 script {
   
                 	sh 'docker pull owasp/zap2docker-stable'
-                	sh 'docker run -t owasp/zap2docker-weekly zap-baseline.py -t https://172.17.0.1:8080|| true'
+                	sh 'docker run -t owasp/zap2docker-stable zap-baseline.py -t https://172.17.0.1:8080|| true'
                     
                 
                 }
