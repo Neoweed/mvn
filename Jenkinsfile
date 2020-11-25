@@ -8,7 +8,7 @@ pipeline{
                 script {
                 	sh 'docker pull owasp/zap2docker-weekly'
                     writeFile file: 'DAST.txt', text: 'DAST_report'
-                    sh 'docker run -t owasp/zap2docker-weekly zap-baseline.py -t http://172.17.0.1:8080'
+                    sh 'docker run -t owasp/zap2docker-weekly zap-baseline.py -t http://127.0.0.1:8080'
 
                 }
             }
